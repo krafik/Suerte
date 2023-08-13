@@ -36,7 +36,9 @@
 									<picture>
 										<!-- <img :src="`${this.publicPath}img/${CATALOG_PRODUCT.image}`" :alt="CATALOG_PRODUCT.name" width="696" height="696"> -->
 										<!-- <img :src="getImage(CATALOG_PRODUCT.image)" :alt="CATALOG_PRODUCT.name" width="696" height="696"> -->
-										<img v-if="this.imageD !== null" :src="`/img/${imageD}`" :alt="CATALOG_PRODUCT.name"
+										<!-- <img v-if="this.imageD !== null" :src="`/img/${imageD}`" :alt="CATALOG_PRODUCT.name"
+											width="696" height="696"> -->
+										<img v-if="this.imageD !== null" :src="require('../assets/img/' + this.imageD)" :alt="CATALOG_PRODUCT.name"
 											width="696" height="696">
 
 									</picture>
@@ -115,8 +117,8 @@
 								:class="inWishList ? 'inWished' : ''" @click="addToWishList(CATALOG_PRODUCT)"></button>
 						</div>
 						<!-- <p>{{ this.CATALOG_PRODUCT.id }}</p> -->
-						<p>{{ this.WISH_LIST.length !== 0 ? this.WISH_LIST : null }}</p>
-						<p>{{ this.isWished }}</p>
+						<!-- <p>{{ this.WISH_LIST.length !== 0 ? this.WISH_LIST : null }}</p>
+						<p>{{ this.isWished }}</p> -->
 					</div>
 				</div>
 
@@ -260,8 +262,8 @@ export default {
 			console.log('call');
 			console.log(this.WISH_LIST);
 			this.WISH_LIST.forEach(element => {
-				// element.id == this.id ? this.inWishList = true : null;
-				return element.id == this.id ? true : false;
+				element.id == this.id ? this.inWishList = true : null;
+				// return element.id == this.id ? true : false;
 			});
 			// if (this.WISH_LIST.length !== 0) {
 			// 		if(this.WISH_LIST.inclides)
