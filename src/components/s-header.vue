@@ -74,7 +74,7 @@
 								</li>
 							</ul>
 
-							<span style="display: block;margin-top: 20px;">TOTAL price: {{ totalPrice }}</span>
+							<!-- <span style="display: block;margin-top: 20px;">TOTAL price: {{ totalPrice }}</span> -->
 						</div>
 					</li>
 					<li class="header-navigation__action-item">
