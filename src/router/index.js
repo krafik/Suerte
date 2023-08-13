@@ -1,5 +1,6 @@
 import { createRouter, createWebHistory, createWebHashHistory } from 'vue-router'
 import HomeView from '../views/HomeView.vue'
+import ProductItem from '../views/ProductItem.vue'
 // import CatalogView from '../views/CatalogView.vue'
 
 const routes = [
@@ -18,7 +19,8 @@ const routes = [
     path: '/catalog/:id',
     name: 'product-item',
     // component: CatalogView
-    component: () => import(/* webpackChunkName: "about" */ '../views/ProductItem.vue'),
+    component:ProductItem,
+    // component: () => import(/* webpackChunkName: "about" */ '../views/ProductItem.vue'),
     props: true
   },
   // {

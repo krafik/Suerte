@@ -20,7 +20,107 @@
 				</ul>
 			</div>
 			<div class="product-item__container">
-				<sProductItem :product_data="CATALOG_PRODUCT" @addToCart="addToCart" @addToWishList="addToWishList"/>
+				<!-- <sProductItem :product_data="CATALOG_PRODUCT" @addToCart="addToCart" @addToWishList="addToWishList"/> -->
+				<!-- <sProductItem :id="id"  @addToCart="addToCart" @addToWishList="addToWishList"/> -->
+				<div class="product-item__inner">
+
+					<div class="product-item__sliders-wrapper">
+
+						<div class="main main-product-slider swiper">
+							<div class="main-product-slider__slides-wrap swiper-wrapper">
+
+								<div class="slider-product-item__slide swiper-slide">
+									<!-- <p>{{ `${this.publicPath}img/${CATALOG_PRODUCT.image}` }}</p> -->
+									<!-- <p>{{ new URL(`../assets/img/17-nutmeg.jpg`, import.meta.url).href }}</p> -->
+
+									<picture>
+										<!-- <img :src="`${this.publicPath}img/${CATALOG_PRODUCT.image}`" :alt="CATALOG_PRODUCT.name" width="696" height="696"> -->
+										<!-- <img :src="getImage(CATALOG_PRODUCT.image)" :alt="CATALOG_PRODUCT.name" width="696" height="696"> -->
+										<img v-if="this.imageD !== null" :src="`/img/${imageD}`" :alt="CATALOG_PRODUCT.name"
+											width="696" height="696">
+
+									</picture>
+								</div>
+
+							</div>
+
+						</div>
+						<!-- thumb -->
+						<div thumbsSlider="" class="thumb thumb-product-slider swiper">
+							<div class="thumb-product-slider__wrapper swiper-wrapper" style="display: flex;">
+
+								<div class="slider-product-item__slide  thumb-product-slider__thumb-img swiper-slide">
+									<picture>
+										<img src="@/assets/img/02-Sterling-thumb.jpg"
+											alt="Тканина Sterling вид материалу ближче мініатюра">
+									</picture>
+								</div>
+								<div class="slider-product-item__slide  thumb-product-slider__thumb-img swiper-slide">
+									<picture>
+										<img src="@/assets/img/02-Sterling-thumb-2.jpg"
+											alt="Тканина Sterling вид материалу ближче мініатюра">
+									</picture>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!-- info -->
+					<div class="product-item__info">
+						<h2 class="product-item__title " tabindex="0">{{ CATALOG_PRODUCT.name }}</h2>
+						<span class="product-item__vendor-code">Article: {{ CATALOG_PRODUCT.article }}</span>
+						<dl class="product-item__list-info list-info-item" tabindex="0">
+
+							<div class="list-info-item__item">
+								<dt class="list-info-item__item-title">Brand:</dt>
+								<dd class="list-info-item__item-descr">Suerte collection«{{ CATALOG_PRODUCT.collection }}»
+								</dd>
+							</div>
+							<div class="list-info-item__item">
+								<dt class="list-info-item__item-title">Textile:</dt>
+								<dd class="list-info-item__item-descr"> {{ CATALOG_PRODUCT.Textile }}</dd>
+							</div>
+							<div class="list-info-item__item">
+								<dt class="list-info-item__item-title">Compound: </dt>
+								<dd class="list-info-item__item-descr">{{ CATALOG_PRODUCT.compound }}</dd>
+							</div>
+
+							<div class="list-info-item__item">
+								<dt class="list-info-item__item-title">Color:</dt>
+								<dd class="list-info-item__item-descr">{{ CATALOG_PRODUCT.color }}</dd>
+							</div>
+							<div class="list-info-item__item">
+								<dt class="list-info-item__item-title">Width:</dt>
+								<dd class="list-info-item__item-descr"> {{ CATALOG_PRODUCT.width }}</dd>
+							</div>
+							<div class="list-info-item__item">
+								<dt class="list-info-item__item-title">Weight: </dt>
+								<dd class="list-info-item__item-descr">{{ CATALOG_PRODUCT.weight }} г/м2</dd>
+							</div>
+
+							<div class="list-info-item__item">
+								<dt class="list-info-item__item-title">Fite standart:</dt>
+								<dd class="list-info-item__item-descr">{{ CATALOG_PRODUCT.fireStandard }}</dd>
+							</div>
+
+
+						</dl>
+						<div class="product-item__price">{{ CATALOG_PRODUCT.price }}<span>$/м<sup>2</sup></span></div>
+
+						<div class="product-item__actions action-product-item">
+							<button class="action-product-item__add-to-basket btn-white"
+								@click="addToCart(CATALOG_PRODUCT)">Add to
+								card</button>
+							<button class="action-product-item__add-to-favorites __icon-Like"
+								:class="inWishList ? 'inWished' : ''" @click="addToWishList(CATALOG_PRODUCT)"></button>
+						</div>
+						<!-- <p>{{ this.CATALOG_PRODUCT.id }}</p> -->
+						<p>{{ this.WISH_LIST.length !== 0 ? this.WISH_LIST : null }}</p>
+						<p>{{ this.isWished }}</p>
+					</div>
+				</div>
+
+
 			</div>
 		</section>
 
@@ -124,51 +224,64 @@
 
 <script>
 import axios from 'axios'
-import	sProductItem from '@/components/s-product-item.vue'
 // import image from `~/assets/img/${CATALOG_PRODUCT.image}`
 import { mapActions, mapGetters } from 'vuex';
+// console.log(new URL(`${publicPath}img/17-nutmeg.jpg`, import.meta.url).href);
 export default {
 
-	name: 'ProductView',
+	name: 'ProductViewItem',
 	props: ['id'],
 	data() {
 		return {
 			product: {},
+			load: false,
+			// idItem: this.id
 			// image
-			image: null
+			imageD: null,
+			inWishList: false
+			// publicPath: process.env.BASE_URL
 		}
 	},
 	components: {
-		sProductItem
+		// sProductItem
 	},
 	computed: {
 		...mapGetters(['CATALOG_PRODUCT', 'WISH_LIST']),
+		// image() {
+		// 	this.imageD = this.CATALOG_PRODUCT.image
+		// 	return require('../assets/img/' + this.CATALOG_PRODUCT.image);
+		// },
+		
 		// getImg() {
 		// 	// console.log(new URL(`${CATALOG_PRODUCT.image}`, import.meta.url).href);
 		// 	return new URL(`../assets/img/${this.CATALOG_PRODUCT.image}`, import.meta.url).href;
 		// }
+		isWished(){
+			console.log('call');
+			console.log(this.WISH_LIST);
+			this.WISH_LIST.forEach(element => {
+				// element.id == this.id ? this.inWishList = true : null;
+				return element.id == this.id ? true : false;
+			});
+			// if (this.WISH_LIST.length !== 0) {
+			// 		if(this.WISH_LIST.inclides)
+			// }
+		},
 
 	},
-	created() {
-		// this.GET_CATALOG_PRODUCT(this.id)
-		// 	.then((responce) => {
-		// 		if (responce.data) {
-		// 			// console.log('data is come');
-		// 			// console.log(responce.data);
-		// 		}
-		// 	})
-	},
+
 	mounted() {
-
-		// this.getProductItem();
-		console.log(this.id);
 		this.GET_CATALOG_PRODUCT(this.id)
 			.then((responce) => {
 				if (responce.data) {
-					// console.log('data is come');
 					// console.log(responce.data);
+					this.imageD = responce.data.image;
+					// this.load = true;
+					console.log('mounted - data is come');
+
 				}
-			})
+			});
+		this.isWished	
 	},
 
 
@@ -176,13 +289,27 @@ export default {
 		...mapActions([
 			"GET_CATALOG_PRODUCT", "ADD_TO_CART", 'ADD_TO_WISH_LIST'
 		]),
+		
+		getImage(name) {
+			// return new URL(`../assets/img/${name}`, import.meta.url).href
+		},
+
 		addToCart(data) {
-			console.log(data);
+			// console.log(data);
 			this.ADD_TO_CART(data)
 		},
 		addToWishList(data) {
-			console.log(data);
-			this.ADD_TO_WISH_LIST(data)
+
+			if (this.WISH_LIST.length === 0) { this.ADD_TO_WISH_LIST(data); this.inWishList = true; }
+
+			else if (this.WISH_LIST.length !== 0) {
+				this.WISH_LIST.forEach(element => {
+					// console.log('elem');
+					// console.log(element);
+					if (element.id == data.id) console.log('this element already exists'); return
+				});
+			}
+
 		},
 
 		// getProductItem() {
@@ -197,3 +324,9 @@ export default {
 
 }
 </script>
+
+<style scoped lang="scss">
+.inWished:before{
+	color: red;
+}
+</style>

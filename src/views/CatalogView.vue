@@ -43,8 +43,8 @@
 									<span class="">Filters</span>
 									<span class=" __icon-Arrow-down"></span>
 								</button>
-								<div class="form-filter__item-body body-item-filter spollers__body">
-									<ul class="body-item-filter__items-wrap">
+								<div class="form-filter__item-body body-item-filter spollers__body" style="display: none;"> 
+									<ul class="body-item-filter__items-wrap" >
 										<li>
 											<fieldset class="body-item-filter__fieldset">
 												<legend>Color</legend>
@@ -131,7 +131,7 @@
 									<span class="">Sort from A to Z</span>
 									<span class=" __icon-Arrow-down"></span>
 								</button>
-								<div class="form-filter__item-sort-body body-sort-filter spollers__body">
+								<div class="form-filter__item-sort-body body-sort-filter spollers__body" style="display: none;">
 									<div class="body-sort-filter__wrap">
 										<a href="#">from the most expensive</a>
 										<a href="#">from the cheapest</a>

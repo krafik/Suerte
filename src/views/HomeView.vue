@@ -19,7 +19,7 @@
 					</div>
 
 					<div class="hero-section__action hero-action">
-						<a href="#" class="hero-action__link hero-action__link-catalog">Перейти в каталог</a>
+						<a href="#" class="hero-action__link hero-action__link-catalog">Go to caalog</a>
 						<a href="#" class="hero-action__link hero-action__link-fb">FB</a>
 						<a href="#" class="hero-action__link hero-action__link-insta">INST</a>
 					</div>
@@ -27,7 +27,7 @@
 			</div>
 		</section>
 		<section class="section-about">
-			<h2 class="visually-hidden">О нас</h2>
+			<h2 class="visually-hidden">About us</h2>
 			<div class="section-about__container">
 				<h3 class="section-about__title section-title">
 					WE ARE THE BIGGEST<br>

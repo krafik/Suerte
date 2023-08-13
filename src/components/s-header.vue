@@ -88,7 +88,8 @@
 								<li v-for="(item, index) in CART" :key="item.id" class="cart-body__item item-cart"
 									style="margin-bottom: 30px;">
 									<div class="item-page-catalog-list__img-wrap" style="border-radius: 0;">
-
+										<!-- <img class="item-page-catalog-list__img"
+											:src="item" alt="a" width="50" height="50"> -->
 										<img class="item-page-catalog-list__img"
 											:src="require('../assets/img/' + item.image)" alt="a" width="50" height="50">
 									</div>
@@ -156,18 +157,42 @@ export default {
 			isOpenCart: false,
 			isOpenWishList: false,
 
-			totalPrice: 0,
+			totalPriceF: 0,
 		}
 	},
 	computed: {
 		...mapGetters(['CART','WISH_LIST']),
+		totalPrice(){
+			if(this.CART.length !==0){
+				let tPrice=0;
+				this.CART.forEach(element => {
+					tPrice += element.price
+					
+				});
+				console.log(tPrice);
+				return tPrice.toFixed(1);
+			}
+			return 0
+		}
+		// image(){
+		// 	// return require('../assets/img/' + this.CART.image);
+		// 	return console.log(this.CART);
+		// }
 		// getImg() {
 		// 	// console.log(new URL(`${CATALOG_PRODUCT.image}`, import.meta.url).href);
 		// 	return new URL(`../assets/img/${this.CATALOG_PRODUCT.image}`, import.meta.url).href;
 		// }
-
+		// totalPrice(){
+		// 	for(let i=0; i<=this.CART.length; i++)
+		// 	console.log(CART[i]);
+		// },
 	},
 	methods: {
+		
+		// totalPrice(){
+		// 	for(let i=0; i<=this.CART.length; i++)
+		// 	console.log(CART[i]);
+		// },
 		openCart() {
 			this.isOpenCart = !this.isOpenCart;
 			// if(this.isOpenWishList === true){
@@ -190,6 +215,7 @@ export default {
 		deleteFromWishList(index) {
 			console.log('click');
 			console.log(index);
+			this.isWished
 			this.DELETE_FROM_WISH_LIST(index);
 		},
 	}
@@ -214,7 +240,7 @@ export default {
 	background-color: #fff;
 	padding: 0.9375rem;
 	box-shadow: 0 0 5px rgba(0, 0, 0, 0.2);
-	overflow-y: auto;
+	overflow-y: hidden;
 
 
 
@@ -224,6 +250,8 @@ export default {
 	display: flex;
 	flex-wrap: wrap;
 	gap: 15px;
+	height: 190px;
+	overflow-y: auto;
 }
 
 .header-navigation__action-link:hover {
