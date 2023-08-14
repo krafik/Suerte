@@ -19,7 +19,7 @@
 					</div>
 
 					<div class="hero-section__action hero-action">
-						<a href="#" class="hero-action__link hero-action__link-catalog">Go to caalog</a>
+						<a href="#" class="hero-action__link hero-action__link-catalog">Go to catalog</a>
 						<a href="#" class="hero-action__link hero-action__link-fb">FB</a>
 						<a href="#" class="hero-action__link hero-action__link-insta">INST</a>
 					</div>
